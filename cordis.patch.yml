@@ -1,0 +1,31 @@
+# The thinking-mode bundle patch: one Host row. The Client half is delivered by
+# the `dsh.client` manifest section, not by a Loader row.
+#
+# `config` is read by index.js (this bundle exports no Config schema, so the
+# values below are passed through as written):
+#   providers      provider routes whose models are served by the local
+#                  thinking server (the `providers` dict keys of llm-pi-ai)
+#   models         model ids to declare; an empty list means every model on
+#                  those routes
+#   levels         offered level -> the wire spelling the endpoint's chat
+#                  template understands (null = "supported, send nothing")
+#   defaultEffort  level a request uses when it names none, or `provider` to
+#                  leave the deployment's own default in place
+#   settingsNs     profile row that owns the provider profiles
+#   enabled        false turns the configuration write off entirely
+#
+# The declaration is written once, through the config-editor seam, into the
+# profile patch's `llm-pi-ai` row; nothing is written for a value already there.
+- insert:
+    - id: thinking-mode
+      name: '@local/dsh-thinking-mode'
+      config:
+        providers:
+          - strata
+        models: []
+        levels:
+          off:
+          low: low
+          medium: medium
+          xhigh: xhigh
+        defaultEffort: medium

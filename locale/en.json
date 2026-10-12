@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Thinking Mode",
+    "description": "Adds a thinking-level control beside the composer's model selector for models served by a local reasoning endpoint."
+  }
+}
